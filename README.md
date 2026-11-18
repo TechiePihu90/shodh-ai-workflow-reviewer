@@ -7,6 +7,7 @@ An AI-assisted workflow review system that checks consistency between written re
 SHODH AI Reviewer helps identify inconsistencies between business requirements and their technical implementation.
 
 The system reviews:
+
 - Written and structured requirements.
 - Specification rules, conditions, actions, and priorities.
 - Workflow nodes, branches, and execution paths.
@@ -24,8 +25,9 @@ It generates a structured JSON report containing the review status, findings, ev
 - **Behavioral Consistency:** Uses representative ticket scenarios to compare expected and actual workflow outcomes.
 - **Code Inspection:** Checks supported Python snippets for syntax and selected structural inconsistencies.
 - **Safe Condition Evaluation:** Uses Python AST-based evaluation instead of executing arbitrary Python code.
-- **Model Client Interface:** Supports a fake model client for reproducible offline testing.
+- **Model Client Interface:** Provides a model-client interface and a FakeModelClient for reproducible offline testing.
 - **Structured Reporting:** Produces PASS, CHANGES_REQUIRED, or INCOMPLETE review results.
+- **Interactive Frontend:** Provides a Streamlit interface for uploading JSON bundles, reviewing results, and downloading reports.
 
 ## 3. Review Statuses
 
@@ -55,7 +57,6 @@ shodh-ai-reviewer/
 │   └── frontend/
 │
 ├── tests/
-│
 ├── fixtures/
 │
 ├── evaluation/
@@ -65,13 +66,14 @@ shodh-ai-reviewer/
 │   │   └── expected_labels.json
 │   ├── expected_labels.json
 │   ├── run_evaluation.py
-│   └── run_holdout.py
+│   ├── run_holdout.py
+│   └── run_ablation.py
 │
 ├── reports/
-│
 ├── checkpoints/
-│
 └── docs/
+    ├── engineering_note.md
+    └── ai_assistance_note.md
 ```
 
 ## 5. Technology Stack
@@ -81,12 +83,18 @@ shodh-ai-reviewer/
 - NetworkX
 - Python AST
 - Pytest
+- Streamlit
 - JSON
 - CSV
 
 ## 6. Installation
 
-Clone or extract the project repository.
+Clone or extract the project repository:
+
+```bash
+git clone https://github.com/TechiePihu90/shodh-ai-workflow-reviewer.git
+cd shodh-ai-workflow-reviewer
+```
 
 Create a virtual environment:
 
@@ -128,7 +136,24 @@ Exit codes:
 - `1`: CHANGES_REQUIRED
 - `2`: INCOMPLETE or review error
 
-## 8. Running Tests
+## 8. Running the Streamlit Frontend
+
+Start the interactive application:
+
+```bash
+streamlit run src/frontend/app.py
+```
+
+The frontend supports:
+
+- Uploading JSON review bundles.
+- Previewing input data.
+- Running the reviewer.
+- Displaying review status and findings.
+- Viewing check results and evidence.
+- Downloading the JSON review report.
+
+## 9. Running Tests and Offline Evaluation
 
 Run the complete automated test suite:
 
@@ -136,38 +161,70 @@ Run the complete automated test suite:
 python -m pytest tests/ -v
 ```
 
-## 9. Running Evaluation
-
 Run the development evaluation:
 
 ```bash
 python evaluation/run_evaluation.py
 ```
 
-Run the additional validation evaluation:
+Run additional validation:
 
 ```bash
 python evaluation/run_holdout.py
 ```
 
-Evaluation reports are saved under:
+Run the controlled ablation experiment:
 
-```text
-reports/
-├── evaluation_results.json
-├── evaluation_results.csv
-├── holdout_results.json
-└── holdout_results.csv
+```bash
+python evaluation/run_ablation.py
 ```
 
-The development evaluation currently contains 12 cases:
-- 3 valid cases
-- 6 defective cases
-- 3 incomplete cases
+### Combined CPU-only offline command
+
+On Windows PowerShell, run the following single command from the project root to execute tests and all evaluation scripts:
+
+```powershell
+python -m pytest tests/ -v; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; python evaluation/run_evaluation.py; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; python evaluation/run_holdout.py; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; python evaluation/run_ablation.py; exit $LASTEXITCODE
+```
+
+These commands use the local FakeModelClient and do not require a live model API key, GPU, or paid model service.
+
+### Evaluation Dataset
+
+The development evaluation contains 12 cases:
+
+- 3 valid cases.
+- 6 defective cases.
+- 3 incomplete cases.
 
 The additional validation set contains 4 cases.
 
-The current observed result is 12/12 matched development cases and 4/4 matched additional validation cases. These cases were inspected during development and should not be interpreted as independent blind holdout performance.
+Observed results:
+
+| Evaluation | Matched cases | Accuracy |
+|---|---:|---:|
+| Development evaluation | 12/12 | 100% |
+| Additional validation | 4/4 | 100% |
+
+These cases were inspected during development. The additional validation cases are not independent blind holdout results and should not be interpreted as such.
+
+### Ablation Experiment
+
+A controlled ablation experiment was performed using the D05 defective bundle.
+
+- Normal mode: workflow consistency checking enabled.
+- Ablation mode: workflow consistency checking disabled.
+
+Observed results:
+
+| Mode | Status | Route mismatch |
+|---|---|---|
+| Normal | CHANGES_REQUIRED | Detected |
+| Ablation | PASS | Not detected |
+
+The experiment demonstrates the contribution of the workflow consistency checker for this test case. The ablation PASS is experimental only because a required check was deliberately skipped.
+
+Machine-readable reports are saved under `reports/`, including JSON and CSV evaluation and ablation outputs.
 
 ## 10. Example Business Rules
 
@@ -180,21 +237,34 @@ The sample workflow uses the following ordered rules:
 
 Rule order is important because earlier matching rules take precedence.
 
-## 11. Supported Scope and Limitations
+## 11. Model Client and AI Performance
+
+The project provides a model-client interface and a local FakeModelClient for reproducible testing.
+
+- The current CLI evaluation uses FakeModelClient.
+- No live language model was connected during the reported evaluation.
+- Semantic model performance was not measured.
+- Fake-client evaluation results must not be interpreted as live model performance.
+- The prompt and model interface are included in the project.
+
+A real model integration can be added through the model-client interface in a future version.
+
+## 12. Supported Scope and Limitations
 
 - Conditions use a restricted Python expression syntax.
 - Supported operations include equality, inequality, numeric comparisons, AND, OR, NOT, and missing-value checks.
 - Arbitrary function calls and arbitrary Python execution are not supported.
 - Workflow behavioral checking uses a defined set of representative test scenarios; it is not an exhaustive proof of all possible inputs.
 - Code inspection is not equivalent to full program execution or formal verification.
-- The current CLI uses a fake model client for reproducible offline testing.
-- The current evaluation results apply only to the documented test bundles.
+- The current model evaluation uses a fake client.
+- Evaluation results apply only to the documented test bundles.
+- Baseline metrics from a separately executed initial-checkpoint evaluation have not been reported.
 
 Unsupported or ambiguous inputs should be reported rather than silently treated as valid.
 
-## 12. Reproducibility
+## 13. Reproducibility
 
-The project uses fixed JSON evaluation bundles and expected labels. The evaluation scripts generate machine-readable JSON and CSV results.
+The project uses fixed JSON evaluation bundles and expected labels. Evaluation scripts generate machine-readable JSON and CSV results.
 
 The initial checkpoint is stored in:
 
@@ -202,18 +272,34 @@ The initial checkpoint is stored in:
 checkpoints/initial_working_checkpoint.zip
 ```
 
-For reproducible results, use the same Python environment, dependencies, input bundles, and evaluation labels.
+For reproducible results, use:
 
-## 13. Future Improvements
+- The same Python environment.
+- The pinned project dependencies.
+- The same input bundles.
+- The same expected evaluation labels.
+- The same evaluation scripts and configuration.
 
-- Streamlit-based interactive review interface.
-- Expanded semantic equivalence checking.
-- More comprehensive approval and revision conflict handling.
-- Stronger code-to-requirement behavioral analysis.
-- Additional independently prepared evaluation cases.
-- Optional integration with a real language model.
-- Improved evidence and finding-quality metrics.
+The reported evaluation uses local CPU execution and does not require external model services.
 
-## 14. Project Purpose
+## 14. Documentation
+
+The `docs/` directory contains:
+
+- `engineering_note.md`: Architecture, supported scope, design decisions, semantic checks, evaluation, debugging examples, and limitations.
+- `ai_assistance_note.md`: Material AI assistance used during development and how the implementation was verified.
+
+## 15. Future Improvements
+
+- Expand the existing Streamlit-based interactive review interface.
+- Integrate an optional real language model.
+- Expand semantic equivalence checking.
+- Improve approval and revision conflict handling.
+- Strengthen code-to-requirement behavioral analysis.
+- Add independently prepared evaluation cases.
+- Improve evidence validation and finding-quality metrics.
+- Establish a separately measured baseline and final checkpoint comparison.
+
+## 16. Project Purpose
 
 This project was developed as an AI/ML engineering assessment to demonstrate structured requirement analysis, deterministic validation, workflow consistency checking, safe code inspection, model integration interfaces, automated testing, and reproducible evaluation.
