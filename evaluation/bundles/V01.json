@@ -1,0 +1,139 @@
+
+{
+  "requirements": [
+    {
+      "rule_id": "R1",
+      "description": "Missing category goes to manual review",
+      "condition": {
+        "expression": "category is missing"
+      },
+      "action": "manual_review",
+      "source_location": "policy.txt:R1",
+      "version": 1
+    },
+    {
+      "rule_id": "R2",
+      "description": "Urgent tickets go to priority queue",
+      "condition": {
+        "expression": "urgent == True"
+      },
+      "action": "priority_queue",
+      "source_location": "policy.txt:R2",
+      "version": 1
+    },
+    {
+      "rule_id": "R3",
+      "description": "Tickets waiting at least 30 minutes go to escalation",
+      "condition": {
+        "expression": "waiting_minutes >= 30"
+      },
+      "action": "escalation",
+      "source_location": "policy.txt:R3",
+      "version": 1,
+      "time_unit": "minutes"
+    }
+  ],
+  "specification": {
+    "version": 1,
+    "rules": [
+      {
+        "rule_id": "R1",
+        "condition": {
+          "expression": "category is missing"
+        },
+        "action": "manual_review",
+        "priority": 1
+      },
+      {
+        "rule_id": "R2",
+        "condition": {
+          "expression": "urgent == True"
+        },
+        "action": "priority_queue",
+        "priority": 2
+      },
+      {
+        "rule_id": "R3",
+        "condition": {
+          "expression": "waiting_minutes >= 30"
+        },
+        "action": "escalation",
+        "priority": 3
+      }
+    ]
+  },
+"workflow": {
+  "version": 1,
+  "nodes": [
+    {
+      "node_id": "start",
+      "node_type": "start",
+      "destination": "check_missing"
+    },
+    {
+      "node_id": "check_missing",
+      "node_type": "condition",
+      "branches": [
+        {
+          "condition": {
+            "expression": "category is missing"
+          },
+          "target_node": "manual_review"
+        },
+        {
+          "condition": null,
+          "target_node": "check_urgent"
+        }
+      ]
+    },
+    {
+      "node_id": "check_urgent",
+      "node_type": "condition",
+      "branches": [
+        {
+          "condition": {
+            "expression": "urgent == True"
+          },
+          "target_node": "priority_queue"
+        },
+        {
+          "condition": null,
+          "target_node": "check_waiting"
+        }
+      ]
+    },
+    {
+      "node_id": "check_waiting",
+      "node_type": "condition",
+      "branches": [
+        {
+          "condition": {
+            "expression": "waiting_minutes >= 30"
+          },
+          "target_node": "escalation"
+        },
+        {
+          "condition": null,
+          "target_node": "normal_queue"
+        }
+      ]
+    },
+    {
+      "node_id": "manual_review",
+      "node_type": "end"
+    },
+    {
+      "node_id": "priority_queue",
+      "node_type": "end"
+    },
+    {
+      "node_id": "escalation",
+      "node_type": "end"
+    },
+    {
+      "node_id": "normal_queue",
+      "node_type": "end"
+    }
+  ]
+}
+}

@@ -1,0 +1,3 @@
+mode,status,workflow_consistency,finding_count,finding_types,route_mismatch_detected
+normal,CHANGES_REQUIRED,CHANGES_REQUIRED,1,ROUTE_MISMATCH,True
+ablation,PASS,SKIPPED,0,,False

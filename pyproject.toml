@@ -1,0 +1,24 @@
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shodh-ai-reviewer"
+version = "0.1.0"
+description = "AI-assisted workflow requirements and consistency reviewer"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic==2.12.5",
+    "networkx==3.6.1",
+    "streamlit==1.67.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.0.2"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

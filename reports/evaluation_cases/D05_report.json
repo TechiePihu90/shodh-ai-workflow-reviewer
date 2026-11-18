@@ -1,0 +1,29 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "summary": "Full review completed with status: CHANGES_REQUIRED.",
+  "findings": [
+    {
+      "type": "ROUTE_MISMATCH",
+      "test_case": "urgent_and_waiting_35_minutes",
+      "ticket": {
+        "category": "billing",
+        "urgent": true,
+        "waiting_minutes": 35
+      },
+      "expected": "priority_queue",
+      "actual": "escalation",
+      "counterexample": {
+        "category": "billing",
+        "urgent": true,
+        "waiting_minutes": 35
+      }
+    }
+  ],
+  "checks": {
+    "specification": "completed",
+    "workflow_graph": "completed",
+    "workflow_consistency": "CHANGES_REQUIRED",
+    "code_snippets_checked": 0,
+    "model_review": "PASS"
+  }
+}

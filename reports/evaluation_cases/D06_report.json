@@ -1,0 +1,19 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "summary": "Full review completed with status: CHANGES_REQUIRED.",
+  "findings": [
+    {
+      "type": "CODE_ACTION_MISMATCH",
+      "rule_id": "R2",
+      "message": "Expected action 'priority_queue' not found.",
+      "source_location": "handler.py:R2"
+    }
+  ],
+  "checks": {
+    "specification": "completed",
+    "workflow_graph": "completed",
+    "workflow_consistency": "PASS",
+    "code_snippets_checked": 1,
+    "model_review": "PASS"
+  }
+}

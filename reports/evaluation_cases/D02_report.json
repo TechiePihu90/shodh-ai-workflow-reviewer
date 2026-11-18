@@ -1,0 +1,19 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "summary": "Full review completed with status: CHANGES_REQUIRED.",
+  "findings": [
+    {
+      "type": "CONDITION_MISMATCH",
+      "rule_id": "R3",
+      "message": "Specification condition differs from requirement.",
+      "source_location": "policy.txt:R3"
+    }
+  ],
+  "checks": {
+    "specification": "completed",
+    "workflow_graph": "completed",
+    "workflow_consistency": "PASS",
+    "code_snippets_checked": 0,
+    "model_review": "PASS"
+  }
+}

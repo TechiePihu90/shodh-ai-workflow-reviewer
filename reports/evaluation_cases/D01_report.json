@@ -1,0 +1,19 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "summary": "Full review completed with status: CHANGES_REQUIRED.",
+  "findings": [
+    {
+      "type": "ACTION_MISMATCH",
+      "rule_id": "R2",
+      "message": "Expected action priority_queue, found normal_queue.",
+      "source_location": "policy.txt:R2"
+    }
+  ],
+  "checks": {
+    "specification": "completed",
+    "workflow_graph": "completed",
+    "workflow_consistency": "PASS",
+    "code_snippets_checked": 0,
+    "model_review": "PASS"
+  }
+}

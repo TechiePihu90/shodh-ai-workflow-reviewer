@@ -1,0 +1,28 @@
+
+{
+  "evaluation_version": 1,
+  "evaluation_type": "additional_validation",
+  "frozen_before_evaluation": false,
+  "cases": [
+    {
+      "case_id": "H01",
+      "expected_status": "PASS",
+      "category": "valid"
+    },
+    {
+      "case_id": "H02",
+      "expected_status": "PASS",
+      "category": "valid"
+    },
+    {
+      "case_id": "H03",
+      "expected_status": "PASS",
+      "category": "valid"
+    },
+    {
+      "case_id": "H04",
+      "expected_status": "INCOMPLETE",
+      "category": "incomplete"
+    }
+  ]
+}

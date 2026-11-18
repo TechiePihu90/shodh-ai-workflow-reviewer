@@ -1,0 +1,109 @@
+{
+  "total_cases": 12,
+  "matched_cases": 12,
+  "mismatched_cases": 0,
+  "accuracy": 1.0,
+  "false_passes": 0,
+  "false_blocks": 0,
+  "incomplete_by_category": {
+    "incomplete": 3
+  },
+  "results": [
+    {
+      "case_id": "V01",
+      "category": "valid",
+      "expected": "PASS",
+      "actual": "PASS",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "V02",
+      "category": "valid",
+      "expected": "PASS",
+      "actual": "PASS",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "V03",
+      "category": "valid",
+      "expected": "PASS",
+      "actual": "PASS",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "D01",
+      "category": "defective",
+      "expected": "CHANGES_REQUIRED",
+      "actual": "CHANGES_REQUIRED",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "D02",
+      "category": "defective",
+      "expected": "CHANGES_REQUIRED",
+      "actual": "CHANGES_REQUIRED",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "D03",
+      "category": "defective",
+      "expected": "CHANGES_REQUIRED",
+      "actual": "CHANGES_REQUIRED",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "D04",
+      "category": "defective",
+      "expected": "CHANGES_REQUIRED",
+      "actual": "CHANGES_REQUIRED",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "D05",
+      "category": "defective",
+      "expected": "CHANGES_REQUIRED",
+      "actual": "CHANGES_REQUIRED",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "D06",
+      "category": "defective",
+      "expected": "CHANGES_REQUIRED",
+      "actual": "CHANGES_REQUIRED",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "I01",
+      "category": "incomplete",
+      "expected": "INCOMPLETE",
+      "actual": "INCOMPLETE",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "I02",
+      "category": "incomplete",
+      "expected": "INCOMPLETE",
+      "actual": "INCOMPLETE",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "I03",
+      "category": "incomplete",
+      "expected": "INCOMPLETE",
+      "actual": "INCOMPLETE",
+      "match": true,
+      "error": ""
+    }
+  ]
+}

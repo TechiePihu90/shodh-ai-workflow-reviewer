@@ -1,0 +1,18 @@
+{
+  "status": "INCOMPLETE",
+  "summary": "Full review completed with status: INCOMPLETE.",
+  "findings": [
+    {
+      "type": "UNSUPPORTED_LANGUAGE",
+      "message": "Unsupported language: javascript",
+      "source_location": "handler.js:R2"
+    }
+  ],
+  "checks": {
+    "specification": "completed",
+    "workflow_graph": "completed",
+    "workflow_consistency": "PASS",
+    "code_snippets_checked": 1,
+    "model_review": "PASS"
+  }
+}

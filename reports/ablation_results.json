@@ -1,0 +1,29 @@
+{
+  "experiment": "Workflow Consistency Checker Ablation",
+  "input_bundle": "D05.json",
+  "model_client": "FakeModelClient",
+  "same_input_for_both_runs": true,
+  "normal_run": {
+    "mode": "normal",
+    "status": "CHANGES_REQUIRED",
+    "workflow_consistency": "CHANGES_REQUIRED",
+    "finding_count": 1,
+    "finding_types": [
+      "ROUTE_MISMATCH"
+    ],
+    "route_mismatch_detected": true
+  },
+  "ablation_run": {
+    "mode": "ablation",
+    "status": "PASS",
+    "workflow_consistency": "SKIPPED",
+    "finding_count": 0,
+    "finding_types": [],
+    "route_mismatch_detected": false
+  },
+  "comparison": {
+    "normal_detected_route_mismatch": true,
+    "ablation_detected_route_mismatch": false,
+    "checker_contribution_demonstrated": true
+  }
+}

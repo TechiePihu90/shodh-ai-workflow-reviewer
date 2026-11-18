@@ -1,0 +1,43 @@
+{
+  "evaluation_type": "additional_validation",
+  "total_cases": 4,
+  "matched_cases": 4,
+  "mismatched_cases": 0,
+  "accuracy_percent": 100.0,
+  "false_passes": 0,
+  "false_blocks": 0,
+  "results": [
+    {
+      "case_id": "H01",
+      "category": "valid",
+      "expected": "PASS",
+      "actual": "PASS",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "H02",
+      "category": "valid",
+      "expected": "PASS",
+      "actual": "PASS",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "H03",
+      "category": "valid",
+      "expected": "PASS",
+      "actual": "PASS",
+      "match": true,
+      "error": ""
+    },
+    {
+      "case_id": "H04",
+      "category": "incomplete",
+      "expected": "INCOMPLETE",
+      "actual": "INCOMPLETE",
+      "match": true,
+      "error": ""
+    }
+  ]
+}

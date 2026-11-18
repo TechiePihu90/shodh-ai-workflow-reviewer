@@ -1,0 +1,89 @@
+{
+  "status": "INCOMPLETE",
+  "summary": "Full review completed with status: INCOMPLETE.",
+  "findings": [
+    {
+      "type": "UNSUPPORTED_CONDITION",
+      "rule_id": "R3",
+      "message": "Unsupported condition expression: Call",
+      "source_location": "policy.txt:R3"
+    },
+    {
+      "type": "INCOMPLETE",
+      "test_case": "waiting_24_minutes",
+      "ticket": {
+        "category": "billing",
+        "urgent": false,
+        "waiting_minutes": 24
+      },
+      "message": "Unsupported expression: Call"
+    },
+    {
+      "type": "INCOMPLETE",
+      "test_case": "waiting_25_minutes",
+      "ticket": {
+        "category": "billing",
+        "urgent": false,
+        "waiting_minutes": 25
+      },
+      "message": "Unsupported expression: Call"
+    },
+    {
+      "type": "INCOMPLETE",
+      "test_case": "waiting_26_minutes",
+      "ticket": {
+        "category": "billing",
+        "urgent": false,
+        "waiting_minutes": 26
+      },
+      "message": "Unsupported expression: Call"
+    },
+    {
+      "type": "INCOMPLETE",
+      "test_case": "waiting_29_minutes",
+      "ticket": {
+        "category": "billing",
+        "urgent": false,
+        "waiting_minutes": 29
+      },
+      "message": "Unsupported expression: Call"
+    },
+    {
+      "type": "INCOMPLETE",
+      "test_case": "waiting_30_minutes",
+      "ticket": {
+        "category": "billing",
+        "urgent": false,
+        "waiting_minutes": 30
+      },
+      "message": "Unsupported expression: Call"
+    },
+    {
+      "type": "INCOMPLETE",
+      "test_case": "waiting_31_minutes",
+      "ticket": {
+        "category": "billing",
+        "urgent": false,
+        "waiting_minutes": 31
+      },
+      "message": "Unsupported expression: Call"
+    },
+    {
+      "type": "INCOMPLETE",
+      "test_case": "normal_ticket",
+      "ticket": {
+        "category": "billing",
+        "urgent": false,
+        "waiting_minutes": 10
+      },
+      "message": "Unsupported expression: Call"
+    }
+  ],
+  "checks": {
+    "specification": "completed",
+    "workflow_graph": "completed",
+    "workflow_consistency": "INCOMPLETE",
+    "code_snippets_checked": 0,
+    "model_review": "PASS"
+  }
+}

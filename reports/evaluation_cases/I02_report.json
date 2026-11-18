@@ -1,0 +1,11 @@
+{
+  "status": "INCOMPLETE",
+  "summary": "Could not determine effective requirements.",
+  "findings": [
+    {
+      "type": "APPROVAL_ERROR",
+      "message": "Duplicate revision order for R3",
+      "evidence": "Approved changes could not be safely applied."
+    }
+  ]
+}
